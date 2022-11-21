@@ -8,7 +8,7 @@ Create a list of such functions for N from 1 to 5, ask the user for the K, and p
 
 def SumofPower(N :int):
     def Power(K :int):
-        return sum([(i+1)**N for i in range(K)])
+        return sum((i+1)**N for i in range(K))
     return Power
 
 ListOfFunc = [SumofPower(i+1) for i in range(5)]
