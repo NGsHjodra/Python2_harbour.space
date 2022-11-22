@@ -1,28 +1,27 @@
 from flask import jsonify, request, Flask, render_template
 from markupsafe import escape
 from Functions import factorial
+import json
 
 app = Flask(__name__)
 
-data = {}
-f = open("secretdata.txt", "r")
-for line in f:
-    user,pw = line.split(":")
-    data[user] = pw
+sc_file = open('secret.json', 'r')
+secret_data = json.load(sc_file)['user']
+    
+def isourcustomer(username : str,password : str)->bool: 
+    for i,data in enumerate(secret_data):
+        if data["username"]==username and data["password"]==password:
+            return True
+    return False
 
 @app.route("/check_login/json")
 def check_login_json():
     username = request.args.get('username', type=str)
-    password = request.args.get('password', type=str)    
-    return jsonify({'authourized': password == data[username]})
-
-@app.route("/check_login")
-def check_login():
-    username = request.args.get('username', type=str)
-    password = request.args.get('password', type=str)    
-    if password != data[username]:
-        return f"Incorrect username/password, <b>{escape(username)}!</b>"
-    return f"Welcome, <b>{escape(username)}!</b>"
+    password = request.args.get('password', type=str)
+    for data in secret_data:
+        if data["username"]==username and data["password"]==password:
+            return f"Welcome, <b>{escape(data['name'])}!</b>"
+    return f"Incorrect username/password, <b>{escape(username)}!</b>"
 
 @app.route("/fac4now")
 def fac4now():
