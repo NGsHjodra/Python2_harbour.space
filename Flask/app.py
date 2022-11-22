@@ -13,20 +13,20 @@ def isourcustomer(username : str,password : str)->bool:
         if data["username"]==username and data["password"]==password:
             return True
     return False
-
-@app.route("/check_login/json")
+#stioarnstst
+@app.route("/login/json")
 def check_login_json():
     username = request.args.get('username', type=str)
     password = request.args.get('password', type=str)
     for data in secret_data:
         if data["username"]==username and data["password"]==password:
-            return f"Welcome, <b>{escape(data['name'])}!</b>"
-    return f"Incorrect username/password, <b>{escape(username)}!</b>"
+            return render_template('facpage.html', name = data['name'], reveal = True)
+    return render_template('facpage.html', name = username, reveal = False)
 
-@app.route("/fac4now")
-def fac4now():
-    a = request.args.get('a', type=int)   
-    return jsonify({'fac': factorial(a)})
+@app.route("/login/fac")
+def loginfac():
+    num = request.args.get('num', type=int)
+    return render_template('facpage.html', fac = factorial(num), reveal = True)
 
 @app.route("/add")
 def add():

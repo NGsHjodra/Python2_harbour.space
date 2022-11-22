@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BKK PY-2 Fac</title>
+    {% if reveal %}
+        {% if name %}
+            <p>Welcome! {{ name }}!</p>
+        {% endif %}
+    {% else %}
+        <p>Username or Password Incorrect!</p>
+    {% endif %}
+</head>
+<body>
+<div>
+    {% if reveal %}
+        <form method="get" action="fac">
+            <p><input type='text' name="num" placeholder="Number"></p>
+            <p><input type="submit"></p>
+        </form>
+    {% endif %}
+</div>
+<body>
+    {% if fac %}
+        <p>Factorial = {{ fac }} wow!!!</p>
+    {% endif %}
+  </body>
+</html>
