@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input type="text" id="value_to_process">
+<button onclick="getFactorialValue()">Calculate</button>
+
+<div>
+    <h2>Result</h2>
+    <p id="result"></p>
+</div>
+
+<script>
+    function getFactorialValue() {
+        let val = document.getElementById('value_to_process').value
+        console.log("Value is " + val)
+
+        fetch('/test-number?value='+val)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                document.getElementById("result").innerText = data["result"]
+            }
+            );
+    }
+
+</script>
+
+</body>
+</html>
