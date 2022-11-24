@@ -1,33 +1,20 @@
-import pygame
+from flask import Flask, request, render_template
 
+app = Flask(__name__)
 
-pygame.init()
+def increase(value: int)->int:
+    return value**2
 
-w = 600
-h = 600
-bg_color = 'green'
-drawing_color = 'blue'
-radius = 30
+@app.route("/")
+def main():
+    return render_template("main.html")
 
-window_size = pygame.math.Vector2(w, h)
-pygame.display.set_mode(window_size)
+@app.route("/test")
+def test_action():
+    val = request.args.get('value')
+    res = increase(int(val))
+    return render_template("main.html", value = res)
 
-done = False
+if __name__=='__main__':
+    app.run(debug=True)
 
-while not done:
-
-    pygame.display.get_surface().fill(bg_color)
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: done = True
-
-    surf = pygame.display.get_surface()
-    pygame.draw.circle(surf, drawing_color, (h-radius, w-radius), radius)
-    pygame.draw.circle(surf, drawing_color, (0+radius, w-radius), radius)
-    pygame.draw.circle(surf, drawing_color, (h-radius, 0+radius), radius)
-    pygame.draw.circle(surf, drawing_color, (0+radius, 0+radius), radius)
-
-    pygame.display.flip()
-
-
-pygame.quit()

@@ -1,34 +1,16 @@
-import pygame
+from flask import Flask, request, render_template
 
+app = Flask(__name__)
 
-pygame.init()
+@app.route("/")
+def main():
+    return render_template("main.html")
 
-w = 600
-h = 600
-bg_color = 'green'
-drawing_color = 'blue'
-radius = 30
+@app.route("/test")
+def test_action():
+    val = request.args.get('value')
+    return render_template("greeting.html", value = val)
 
-window_size = pygame.math.Vector2(w, h)
-pygame.display.set_mode(window_size)
+if __name__=='__main__':
+    app.run(debug=True)
 
-done = False
-
-x = w / 2
-y = h / 2
-
-while not done:
-
-    pygame.display.get_surface().fill(bg_color)
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: done = True
-
-    surf = pygame.display.get_surface()
-    pygame.draw.circle(surf, drawing_color, (x, y), radius)
-
-    pygame.display.flip()
-
-    radius += 0.1
-
-pygame.quit()
