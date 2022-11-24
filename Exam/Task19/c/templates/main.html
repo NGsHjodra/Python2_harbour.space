@@ -5,12 +5,17 @@
     <title>BKK PY-2 demo page</title>
 </head>
 <body>
-<p>Greeting</p>
+<p>Add value</p>
 <div>
     <form method="get" action="/test">
-        <p><input type='text' name="value" placeholder="enter your name"></p>
+        <p><input type='number' name="value" placeholder="enter a number"></p>
         <p><input type="submit"></p>
     </form>
 </div>
+{% if value %}
+<div>
+    <p>Sum value: {{value}}</p>
+</div>
+{% endif %}
 </body>
 </html>
