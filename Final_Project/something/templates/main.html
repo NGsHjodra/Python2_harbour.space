@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BKK PY-2 demo page</title>
+</head>
+<body>
+<p>Working on everything...</p>
+<div>
+</div>
+<script>
+    function navigate() {
+        window.location.href = 'done';  // Redirects user to the /map route when 'create_map' is finished
+    }
+    fetch('working').then(navigate); // Performing 'create_map' and then calls navigate() function, declared above
+</script>
+</body>
+</html>
